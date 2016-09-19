@@ -89,6 +89,10 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
  sed -i "s/upload_max_filesize = 100M/upload_max_filesize= ${PHP_UPLOAD_MAX_FILESIZE}M/g" /etc/php5/conf.d/php.ini
 fi
 
+if [ ! -z "$NGINX_TRY_FILES" ]; then
+ sed -i "s/try_files \$uri =404;/try_files ${NGINX_TRY_FILES};/g" /etc/nginx/sites-available/default.conf
+fi
+
 # Always chown webroot for better mounting
 chown -Rf nginx.nginx /var/www/html
 
