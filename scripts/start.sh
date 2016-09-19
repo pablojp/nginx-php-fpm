@@ -91,6 +91,7 @@ fi
 
 if [ ! -z "$NGINX_TRY_FILES" ]; then
  sed -i "s/try_files \$uri =404;/try_files ${NGINX_TRY_FILES};/g" /etc/nginx/sites-available/default.conf
+ sed -i "s/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ \/index\.php?\$query_string;/g" /etc/nginx/sites-available/default.conf
 fi
 
 # Always chown webroot for better mounting
