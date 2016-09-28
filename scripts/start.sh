@@ -95,7 +95,9 @@ if [ ! -z "$NGINX_TRY_FILES" ]; then
 fi
 
 # Always chown webroot for better mounting
-chown -Rf nginx.nginx /var/www/html
+if [ ! -z "$USER_OWNER" ]; then
+  chown -Rf ${USER_OWNER}.${USER_OWNER} /var/www/html
+fi
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
